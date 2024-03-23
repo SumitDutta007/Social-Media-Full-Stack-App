@@ -18,9 +18,6 @@ import './topbar.css';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-
-const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "50px",
