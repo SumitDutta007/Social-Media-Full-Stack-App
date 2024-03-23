@@ -42,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://social-media-backend-dwnj.onrender.com"
+  "proxy": "https://social-media-backend-dwnj.onrender.com/api"
 }
