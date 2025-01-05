@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import './register.css'
 import { Link, useNavigate } from 'react-router-dom';
-import axiosInstance from 'axios.js';
+import axiosInstance from './axios.js';
 
 function Register() {
 
