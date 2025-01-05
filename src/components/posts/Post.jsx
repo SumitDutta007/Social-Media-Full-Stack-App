@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './post.css'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import axios from 'axios';
+import axiosInstance from 'axios.js';
 import {format} from 'timeago.js'
 import {Link } from 'react-router-dom'
 import { useContext } from 'react';
@@ -21,7 +21,7 @@ function Post({post}) {
 
     useEffect(()=>{
         const fetchUser = async()=>{
-            const res = await axios.get(`/users?userId=${post.userId}`)
+            const res = await axiosInstance.get(`/api/users?userId=${post.userId}`)
             setUser(res.data)
         }
         fetchUser()
@@ -30,7 +30,7 @@ function Post({post}) {
 
     const likeHandler = ()=>{
         try{
-            axios.put('/posts/'+post._id+'/like',{userId:currentUser._id})
+            axiosInstance.put('/api/posts/'+post._id+'/like',{userId:currentUser._id})
         }
         catch(err){
             console.log(err)
