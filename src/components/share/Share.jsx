@@ -6,6 +6,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import './share.css'
 import { AuthContext } from '../../context/AuthContext';
 import { useState, useContext ,useRef} from 'react';
+import axiosInstance from 'axios.js';
 import axios from 'axios';
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -37,7 +38,7 @@ function Share() {
             }
         }
         try{
-            await axios.post("/posts",newPost);
+            await axiosInstance.post("/api/posts",newPost);
             window.location.reload();
         }catch(err){
             console.log(err);
