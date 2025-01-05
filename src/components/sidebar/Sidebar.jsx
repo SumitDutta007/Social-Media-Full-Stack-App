@@ -14,7 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Friend from '../friends/Friend';
-import axios from 'axios';
+import axiosInstance from 'axios.js';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
@@ -45,7 +45,7 @@ function ResponsiveDrawer(props) {
   useEffect(() => {
     const getAllUsers = async () => {
       try {
-        const response = await axios.get('/users/all');
+        const response = await axiosInstance.get('/api/users/all');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
