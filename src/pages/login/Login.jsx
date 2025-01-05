@@ -29,7 +29,9 @@ function Login() {
                     <input type="password" placeholder='Password' className="loginInput" required ref={password}/>
                     <button className="loginButton" type='submit' disabled={isFetching}>{isFetching?<CircularProgress color='inherit' size="30px"/>:"Log In"}</button>
                     <span className="loginForgot">Forgot Password?</span>
-                    <button className="loginRegisterButton">{isFetching?<CircularProgress color='inherit' size="30px"/>:"Create new account"}</button>
+                    <Link to='/register' style={{textDecoration: 'none',alignSelf:"center"}}>
+                        <button className="loginRegisterButton">{isFetching?<CircularProgress color='inherit' size="30px"/>:"Create new account"}</button>
+                    </Link>
                 </form>
             </div>
         </div>
