@@ -14,7 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Friend from '../friends/Friend';
-import axiosInstance from 'axios.js';
+import axiosInstance from './axios.js';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
