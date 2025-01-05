@@ -4,7 +4,7 @@ import ResponsiveDrawer from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightsidebar/Rightsidebar';
 import './profile.css'
-import axios from 'axios';
+import axiosInstance from 'axios.js';
 import { useParams } from 'react-router'
 
 function Profile() {
@@ -16,7 +16,7 @@ function Profile() {
 
   useEffect(()=>{
     const fetchUser = async()=>{
-      const res = await axios.get(`/users?username=${username}`)
+      const res = await axiosInstance.get(`/users?username=${username}`)
       setUser(res.data);
     }
     fetchUser();
