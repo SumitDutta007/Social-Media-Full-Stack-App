@@ -59,7 +59,7 @@ function Rightbar({user}) {
         <div className="birthdayContainer">
           <img className='birthdayImg' src={PF+'/birthday.png'} alt="birthday" />
           <span className='birthdayText'>
-            <b>Sexy</b> and <b>3 other friends</b> have a birthday today !
+            <b>Jhon</b> and <b>3 other friends</b> have a birthday today !
           </span>
         </div>
         <h3 className="rightbarTitle">Online Friends</h3>
