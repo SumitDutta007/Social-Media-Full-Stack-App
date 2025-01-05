@@ -3,7 +3,7 @@ import './rightbar.css'
 import { Users } from '../../dummyData'
 import Online from '../online/Online'
 import { useState, useEffect } from 'react'
-import axiosInstance from './axios.js'
+import axiosInstance from '../../axios.js'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import Add from '@mui/icons-material/Add';
