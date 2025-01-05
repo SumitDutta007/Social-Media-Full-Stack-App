@@ -1,4 +1,4 @@
-import axiosInstance from 'axios.js';
+import axiosInstance from './axios.js';
 
 export const loginCall = async (userCredentials, dispatch) => {
     dispatch({ type: 'LOGIN_START' });
