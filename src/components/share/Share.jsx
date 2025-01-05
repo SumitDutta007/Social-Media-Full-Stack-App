@@ -6,7 +6,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import './share.css'
 import { AuthContext } from '../../context/AuthContext';
 import { useState, useContext ,useRef} from 'react';
-import axiosInstance from './axios.js';
+import axiosInstance from '../../axios.js';
 import axios from 'axios';
 import CancelIcon from '@mui/icons-material/Cancel';
 
