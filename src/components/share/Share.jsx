@@ -39,6 +39,7 @@ function Share() {
         }
         try{
             await axiosInstance.post("/api/posts",newPost);
+            window.location.reload()
         }catch(err){
             console.log(err);
         }
