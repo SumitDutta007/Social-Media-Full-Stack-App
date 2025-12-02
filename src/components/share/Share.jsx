@@ -3,7 +3,6 @@ import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import LabelIcon from "@mui/icons-material/Label";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PermMediaIcon from "@mui/icons-material/PermMedia";
-import axios from "axios";
 import React, { useContext, useRef, useState } from "react";
 import axiosInstance from "../../axios.js";
 import { AuthContext } from "../../context/AuthContext";
@@ -29,7 +28,7 @@ function Share() {
       data.append("file", file);
       newPost.img = fileName;
       try {
-        await axios.post("/upload", data);
+        await axiosInstance.post("/api/upload", data);
       } catch (err) {
         console.log(err);
       }
