@@ -66,7 +66,7 @@ function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + "/" + post.img} alt="" />
+          <img className="postImg" src={PF + "/posts/" + post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
