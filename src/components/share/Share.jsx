@@ -27,7 +27,7 @@ function Share() {
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-      newPost.img = "posts/" + fileName;
+      newPost.img = fileName;
       try {
         await axios.post("/upload", data);
       } catch (err) {
