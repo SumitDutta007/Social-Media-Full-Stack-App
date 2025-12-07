@@ -68,7 +68,21 @@ function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + "/posts/" + post.img} alt="" />
+          {post?.img && (
+            <img
+              className="postImg"
+              src={
+                post.img.startsWith("http")
+                  ? post.img
+                  : `${PF}/posts/${post.img}`
+              }
+              alt=""
+              onError={(e) => {
+                console.log("Image load error:", post.img);
+                e.target.style.display = "none";
+              }}
+            />
+          )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

@@ -32,11 +32,15 @@ function Share() {
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-      newPost.img = fileName;
       try {
-        await axiosInstance.post("/api/upload", data);
+        const uploadRes = await axiosInstance.post("/api/upload", data);
+        console.log("Upload response:", uploadRes.data);
+        // Use the full URL from Cloudinary if available, otherwise use filename
+        newPost.img = uploadRes.data.url || uploadRes.data.filename || fileName;
+        console.log("Image URL saved:", newPost.img);
       } catch (err) {
-        console.log(err);
+        console.error("Upload error:", err);
+        return; // Don't create post if upload fails
       }
     }
     try {
