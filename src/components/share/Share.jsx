@@ -17,8 +17,14 @@ function Share() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!user?.id) {
+      console.error("User not loaded");
+      return;
+    }
+
     const newPost = {
-      userId: user._id,
+      userId: user.id,
       desc: desc.current.value,
     };
     if (file) {
@@ -48,14 +54,14 @@ function Share() {
           <img
             className="shareProfileImg"
             src={
-              user.profilePicture
+              user?.profilePicture
                 ? PF + "/" + user.profilePicture
                 : PF + "/users/noAvatar.png"
             }
             alt=""
           />
           <input
-            placeholder={`What's in your mind ${user.username}? `}
+            placeholder={`What's in your mind ${user?.username || "there"}? `}
             ref={desc}
             className="shareInput"
           />

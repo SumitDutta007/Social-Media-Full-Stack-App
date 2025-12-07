@@ -15,8 +15,8 @@ function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    setIsLiked(post.likes.includes(currentUser._id));
-  }, [currentUser._id, post.likes]);
+    setIsLiked(post.likes.includes(currentUser?.id));
+  }, [currentUser?.id, post.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,9 +27,11 @@ function Post({ post }) {
   }, [post.userId]);
 
   const likeHandler = () => {
+    if (!currentUser?.id) return; // Don't proceed if user is not loaded
+
     try {
-      axiosInstance.put("/api/posts/" + post._id + "/like", {
-        userId: currentUser._id,
+      axiosInstance.put("/api/posts/" + post.id + "/like", {
+        userId: currentUser.id,
       });
     } catch (err) {
       console.log(err);

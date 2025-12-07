@@ -11,14 +11,16 @@ function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?._id)
+    currentUser?.followings?.includes(user?.id)
   );
 
   useEffect(() => {
     const getFriends = async () => {
+      if (!user?.id) return; // Don't fetch if user is not defined
+
       try {
         const friendList = await axiosInstance.get(
-          "/api/users/friends/" + user._id
+          "/api/users/friends/" + user.id
         );
         setFriends(friendList.data);
       } catch (err) {
@@ -29,17 +31,19 @@ function Rightbar({ user }) {
   }, [user]);
 
   const handleClick = async () => {
+    if (!user?.id || !currentUser?.id) return; // Don't proceed if either user is not loaded
+
     try {
       if (followed) {
-        await axiosInstance.put(`/api/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
+        await axiosInstance.put(`/api/users/${user.id}/unfollow`, {
+          userId: currentUser.id,
         });
-        dispatch({ type: "UNFOLLOW", payload: user._id });
+        dispatch({ type: "UNFOLLOW", payload: user.id });
       } else {
-        await axiosInstance.put(`/api/users/${user._id}/follow`, {
-          userId: currentUser._id,
+        await axiosInstance.put(`/api/users/${user.id}/follow`, {
+          userId: currentUser.id,
         });
-        dispatch({ type: "FOLLOW", payload: user._id });
+        dispatch({ type: "FOLLOW", payload: user.id });
       }
       setFollowed(!followed);
     } catch (err) {}
@@ -65,7 +69,7 @@ function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
-        {user.username !== currentUser.username && (
+        {user?.username !== currentUser?.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
             {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
@@ -100,7 +104,7 @@ function Rightbar({ user }) {
                 to={"/profile/" + p.username}
                 style={{ textDecoration: "none" }}
               >
-                <div key={p._id} className="rightbarFollowing">
+                <div key={p.id} className="rightbarFollowing">
                   <img
                     src={
                       p.profilePicture
