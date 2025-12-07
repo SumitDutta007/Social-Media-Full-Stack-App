@@ -1,49 +1,116 @@
-.profile{
-    display: flex;
+.profile {
+  display: flex;
 }
 
-.profileRight{
-    flex:9;
+.profileRight {
+  flex: 9;
 }
-.profileCover{
-    height: 50vh;
-    position: relative;
+.profileCover {
+  height: 50vh;
+  position: relative;
 }
-.profileCoverImg{
-    width: 100%;
-    height: 40vh;
-    object-fit: cover;
+.profileCoverImg {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
 }
-.profileUserImg{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    top: 30vh;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: 3px solid white;
+.profileUserImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 30vh;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 3px solid white;
 }
-.profileInfo{
-    display: flex;
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.profileInfo h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.profileInfo p {
+  font-size: 14px;
+  color: gray;
+}
+
+.profileRightBottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .profile {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
-.profileInfo h4{
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-.profileInfo p{
-    font-size: 14px;
-    color: gray;
+  }
+
+  .profileRight {
+    flex: 1;
+    width: 100%;
+  }
+
+  .profileCover {
+    height: 35vh;
+  }
+
+  .profileCoverImg {
+    height: 25vh;
+  }
+
+  .profileUserImg {
+    width: 100px;
+    height: 100px;
+    top: 20vh;
+    border: 2px solid white;
+  }
+
+  .profileInfo h4 {
+    font-size: 20px;
+  }
+
+  .profileInfo p {
+    font-size: 13px;
+  }
+
+  .profileRightBottom {
+    flex-direction: column;
+    padding: 10px;
+  }
 }
 
+/* Tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .profileCover {
+    height: 45vh;
+  }
 
-.profileRightBottom{
-    display: flex;
-    justify-content: space-between;
+  .profileCoverImg {
+    height: 35vh;
+  }
+
+  .profileUserImg {
+    width: 130px;
+    height: 130px;
+    top: 27vh;
+  }
+
+  .profileRightBottom {
+    flex-direction: column;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+  .profileRightBottom {
+    flex-direction: row;
+  }
 }

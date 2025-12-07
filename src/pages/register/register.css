@@ -1,81 +1,166 @@
-.register{
-    width: 100vw;
-    height: 100vh;
-    background-color: #dadbdd;
-    display: flex;
+.register {
+  width: 100vw;
+  height: 100vh;
+  background-color: #dadbdd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerWrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+}
+.registerLeft,
+.registerRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.registerLogo {
+  font-size: 50px;
+  font-weight: 800;
+  color: #1775ee;
+  margin-bottom: 10px;
+}
+.registerDesc {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.registerBox {
+  padding: 20px;
+  height: auto;
+  min-height: 450px;
+  display: flex;
+  background-color: white;
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+.registerInput {
+  height: 50px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+.registerInput:focus {
+  outline: none;
+  border-color: #1775ee;
+  box-shadow: 0 0 0 2px rgba(23, 117, 238, 0.1);
+}
+.registerButton {
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background-color: #1775ee;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.registerButton:hover {
+  background-color: #1a8cff;
+}
+.registerButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.registerForgot {
+  text-align: center;
+  color: #1775ee;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px 0;
+}
+.registerForgot:hover {
+  text-decoration: underline;
+}
+.registerRegisterButton {
+  width: 100%;
+  align-self: center;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background-color: #42b72a;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.registerRegisterButton:hover {
+  background-color: #36a420;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .registerWrapper {
+    width: 95%;
+    height: auto;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .registerLeft {
+    margin-bottom: 20px;
     align-items: center;
-    justify-content: center;
-}
-
-.registerWrapper{
-    width: 70%;height: 70%;
-    display: flex;
-}
-.registerLeft,.registerRight{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.registerLogo{
-    font-size: 50px;
-    font-weight: 800;
-    color: #1775ee;
-    margin-bottom: 10px;
-}
-.registerDesc{
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.registerBox{
-    padding: 20px;
-    height: 65vh;
-    display: flex;
-    background-color: white;
-    border-radius: 15px;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.registerInput{
-    height: 45px;
-    margin-bottom: 20px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 15px;
-}
-.registerInput:focus{
-    outline: none;
-}
-.registerButton{
-    height: 45px;
-    padding: 10px;
-    border: none;
-    background-color: #1775ee;
-    color: white;
-    font-size: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.registerButton:hover{
-    background-color: #1a8cff;
-}
-.registerForgot{
     text-align: center;
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
-}
-.registerRegisterButton{
-    align-self: center;
+  }
+
+  .registerLogo {
+    font-size: 35px;
+    margin-bottom: 5px;
+  }
+
+  .registerDesc {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
+  .registerBox {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    min-height: 400px;
+  }
+
+  .registerInput {
     height: 50px;
-    padding: 10px;
-    border: none;
-    background-color: #42b72a;
-    color: white;
-    font-size: 20px;
-    border-radius: 10px;
-    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .registerButton {
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .registerRegisterButton {
+    width: 100%;
+    font-size: 18px;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .registerWrapper {
+    width: 85%;
+  }
+
+  .registerLogo {
+    font-size: 45px;
+  }
+
+  .registerBox {
+    width: 95%;
+  }
 }

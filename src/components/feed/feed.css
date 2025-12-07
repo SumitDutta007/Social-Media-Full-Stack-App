@@ -1,4 +1,23 @@
-.feed{
-    padding: 25px;
-    margin-top: 10vh;
+.feed {
+  flex: 5.5;
+  padding: 25px;
+  margin-top: 10vh;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .feed {
+    flex: 1;
+    padding: 10px;
+    margin-top: 70px;
+    width: 100%;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .feed {
+    flex: 6;
+    padding: 15px;
+  }
 }

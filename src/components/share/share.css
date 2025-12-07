@@ -1,90 +1,157 @@
-.share{
+.share {
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  -moz-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+.shareWrapper {
+  padding: 10px;
+}
+.shareTop {
+  display: flex;
+  align-items: center;
+}
+.shareProfileImg {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.shareInput {
+  border: none;
+  width: 80%;
+}
+.shareInput:focus {
+  outline: none;
+}
+.shareHr {
+  margin: 10px 0px;
+  border: none;
+  height: 1px;
+  background-color: #eee;
+}
+.shareImgContainer {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.shareImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.shareCancelImg {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  font-size: 20px;
+  color: white;
+  background-color: #494949;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+.shareBottom {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.shareOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10px;
+}
+.shareOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 25px;
+}
+.shareIcon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.shareButton {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.3s ease;
+}
+.shareButton:hover {
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .shareWrapper {
+    padding: 8px;
+  }
+
+  .shareProfileImg {
+    height: 40px;
+    width: 40px;
+  }
+
+  .shareInput {
+    width: 85%;
+    font-size: 14px;
+  }
+
+  .shareBottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .shareOptions {
     width: 100%;
-    border-radius: 25px;
-    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
-    -moz-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
-}
-.shareWrapper{
-    padding: 10px;
-}
-.shareTop{
-    display: flex;
-    align-items: center;
-}
-.shareProfileImg{
-    height: 50px;width: 50px;border-radius: 50%;object-fit: cover;
-    margin-right: 10px;
-}
-.shareInput{
-    border: none;
-    width: 80%;
-}
-.shareInput:focus{
-    outline: none;
-}
-.shareHr{
-    margin: 10px 0px;
-    border: none;
-    height: 1px;
-    background-color: #eee;
-}
-.shareImgContainer{
-    position: relative;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.shareImg{
+    margin-left: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .shareOption {
+    margin-right: 15px;
+    font-size: 14px;
+  }
+
+  .shareOptionText {
+    display: none; /* Hide text, show only icons on mobile */
+  }
+
+  .shareIcon {
+    font-size: 24px;
+    margin-right: 0;
+  }
+
+  .shareButton {
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .shareImg {
+    max-height: 300px;
+  }
 }
-.shareCancelImg{
-    position: absolute;
-    top: 0;
-    right: 0px;
-    font-size: 20px;
-    color: white;
-    background-color: #494949;
-    border-radius: 50%;
-    padding: 5px;
-    cursor: pointer;
-}
-.shareBottom{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-.shareOptions{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 10px;
-}
-.shareOption{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-right: 25px;
-}
-.shareIcon{
-    font-size: 18px;
-    margin-right: 5px;
-}
-.shareButton{
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    font-weight: 500;
-    color: #555;
-    transition: all 0.3s ease;
-}
-.shareButton:hover{
-    background-color: #f9f9f9;
-    color: #000;
+
+/* Tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .shareOption {
+    margin-right: 15px;
+  }
+
+  .shareOptionText {
+    font-size: 13px;
+  }
 }

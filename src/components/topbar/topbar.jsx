@@ -1,22 +1,26 @@
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import MailIcon from "@mui/icons-material/Mail";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
+import AppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { alpha, styled } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useContext } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import './topbar.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Logout } from "../../context/AuthActions";
 import { AuthContext } from "../../context/AuthContext";
+import "./topbar.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,9 +63,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-
-  const {user} = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -86,6 +90,13 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    dispatch(Logout());
+    localStorage.removeItem("token");
+    handleMenuClose();
+    navigate("/login");
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -103,9 +114,23 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to={`profile/${user.username}`} style={{textDecoration:"none",color:"black"}}>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link
+        to={`profile/${user.username}`}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <MenuItem onClick={handleMenuClose}>
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          Profile
+        </MenuItem>
       </Link>
+      <MenuItem onClick={handleLogout}>
+        <ListItemIcon>
+          <ExitToAppIcon fontSize="small" />
+        </ListItemIcon>
+        Logout
+      </MenuItem>
     </Menu>
   );
 
@@ -154,17 +179,39 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <img style={{objectFit:"cover",height:"40px",width:"40px",borderRadius:"50px"}} src={user.profilePicture?PF+'/'+user.profilePicture:PF+'/users/noAvatar.png'} alt="user" />
+          <img
+            style={{
+              objectFit: "cover",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50px",
+            }}
+            src={
+              user.profilePicture
+                ? PF + "/" + user.profilePicture
+                : PF + "/users/noAvatar.png"
+            }
+            alt="user"
+          />
         </IconButton>
-        <Link to={`profile/${user.username}`} style={{textDecoration:"none",color:"black"}}>
-        <p>Profile</p>
+        <Link
+          to={`profile/${user.username}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <p>Profile</p>
         </Link>
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>
+        <IconButton size="large" color="inherit">
+          <ExitToAppIcon />
+        </IconButton>
+        <p>Logout</p>
       </MenuItem>
     </Menu>
   );
 
   return (
-    <Box className='topbar' sx={{ flexGrow: 1 }}>
+    <Box className="topbar" sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -173,17 +220,16 @@ export default function PrimarySearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-          >
-          </IconButton>
-          <Link to='/' style={{textDecoration:"none",color:"white"}}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Buddies
-          </Typography>
+          ></IconButton>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              Buddies
+            </Typography>
           </Link>
           <Search>
             <SearchIconWrapper>
@@ -223,7 +269,20 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <img style={{objectFit:"cover",height:"40px",width:"40px",borderRadius:"50px"}} src={user.profilePicture?PF+'/'+user.profilePicture:PF+'/users/noAvatar.png'} alt="user" />
+              <img
+                style={{
+                  objectFit: "cover",
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50px",
+                }}
+                src={
+                  user.profilePicture
+                    ? PF + "/" + user.profilePicture
+                    : PF + "/users/noAvatar.png"
+                }
+                alt="user"
+              />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
