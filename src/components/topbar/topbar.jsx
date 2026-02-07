@@ -69,6 +69,7 @@ export default function PrimarySearchAppBar() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -95,6 +96,18 @@ export default function PrimarySearchAppBar() {
     localStorage.removeItem("token");
     handleMenuClose();
     navigate("/login");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   const menuId = "primary-search-account-menu";
@@ -235,10 +248,14 @@ export default function PrimarySearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <form onSubmit={handleSearch} style={{ width: '100%' }}>
+              <StyledInputBase
+                placeholder="Search users or posts…"
+                inputProps={{ "aria-label": "search" }}
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+            </form>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

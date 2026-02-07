@@ -1,0 +1,203 @@
+.searchResultsContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 10vh;
+}
+
+.searchResultsMain {
+  flex: 5.5;
+  padding: 25px;
+}
+
+.searchResultsWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.searchTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.searchQuery {
+  color: #1775ee;
+  font-weight: 600;
+}
+
+/* Tabs */
+.searchTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.searchTab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.searchTab:hover {
+  color: #1775ee;
+}
+
+.searchTab.active {
+  color: #1775ee;
+  font-weight: 600;
+}
+
+.searchTab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1775ee;
+}
+
+/* Loading */
+.searchLoading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 18px;
+}
+
+/* No Results */
+.noResults {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 16px;
+}
+
+/* Posts Section */
+.searchPostsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Users Section */
+.searchUsersSection {
+  margin-top: 20px;
+}
+
+.usersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.userCard:hover {
+  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.userCardImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.userCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.userCardName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.userCardDesc {
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .searchResultsContainer {
+    flex-direction: column;
+    margin-top: 70px;
+  }
+
+  .searchResultsMain {
+    flex: 1;
+    padding: 10px;
+    padding-bottom: 80px;
+  }
+
+  .searchTitle {
+    font-size: 20px;
+  }
+
+  .searchTab {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .usersList {
+    grid-template-columns: 1fr;
+  }
+
+  .userCard {
+    padding: 12px;
+  }
+
+  .userCardImg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .userCardName {
+    font-size: 15px;
+  }
+
+  .userCardDesc {
+    font-size: 13px;
+    max-width: 150px;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .searchResultsMain {
+    flex: 6;
+    padding: 15px;
+  }
+
+  .usersList {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}

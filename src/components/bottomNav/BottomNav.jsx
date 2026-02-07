@@ -1,12 +1,12 @@
 import HomeIcon from "@mui/icons-material/Home";
-import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
+import PersonIcon from "@mui/icons-material/Person";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 import * as React from "react";
 import { useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./bottomNav.css";
 
@@ -29,7 +29,7 @@ export default function BottomNav() {
 
   const handleNavigation = (event, newValue) => {
     setValue(newValue);
-    
+
     switch (newValue) {
       case 0:
         navigate("/");
@@ -51,11 +51,7 @@ export default function BottomNav() {
       className="bottom-nav-container"
       elevation={3}
     >
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={handleNavigation}
-      >
+      <BottomNavigation showLabels value={value} onChange={handleNavigation}>
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
         <BottomNavigationAction label="Friends" icon={<PeopleIcon />} />

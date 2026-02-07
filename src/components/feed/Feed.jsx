@@ -12,7 +12,7 @@ function Feed({ username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       const userId = user?._id || user?.id;
-      
+
       if (!username && !userId) {
         console.log("User not loaded yet, skipping fetch");
         return; // Don't fetch if user is not loaded
@@ -23,15 +23,18 @@ function Feed({ username }) {
         const res = username
           ? await axiosInstance.get("/api/posts/profile/" + username)
           : await axiosInstance.get("/api/posts/timeline/all/" + userId);
-        
+
         console.log("Fetched posts:", res.data);
         setPosts(
           res.data.sort((p1, p2) => {
             return new Date(p2.createdAt) - new Date(p1.createdAt);
-          })
+          }),
         );
       } catch (err) {
-        console.error("Error fetching posts:", err.response?.data || err.message);
+        console.error(
+          "Error fetching posts:",
+          err.response?.data || err.message,
+        );
       }
     };
     fetchPosts();
@@ -42,7 +45,7 @@ function Feed({ username }) {
       <div className="feedWrapper">
         {(!username || username === user?.username) && <Share />}
         {posts.length === 0 ? (
-          <p style={{ textAlign: 'center', marginTop: '20px', color: '#888' }}>
+          <p style={{ textAlign: "center", marginTop: "20px", color: "#888" }}>
             No posts to display. Be the first to share something!
           </p>
         ) : (
