@@ -18,36 +18,52 @@ function Share() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!user?.id) {
-      console.error("User not loaded");
+    console.log("Submit button clicked");
+    console.log("User data:", user);
+
+    if (!user?.id && !user?._id) {
+      console.error("User not loaded or no user ID found");
+      alert("Please login to create a post");
       return;
     }
 
+    const userId = user.id || user._id;
+    console.log("Using userId:", userId);
+
     const newPost = {
-      userId: user.id,
+      userId: userId,
       desc: desc.current.value,
     };
+
+    console.log("New post data (before image):", newPost);
+
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
       try {
+        console.log("Uploading file...");
         const uploadRes = await axiosInstance.post("/api/upload", data);
         console.log("Upload response:", uploadRes.data);
         // Use the full URL from Cloudinary if available, otherwise use filename
         newPost.img = uploadRes.data.url || uploadRes.data.filename || fileName;
         console.log("Image URL saved:", newPost.img);
       } catch (err) {
-        console.error("Upload error:", err);
+        console.error("Upload error:", err.response?.data || err.message);
+        alert("Failed to upload image. Please try again.");
         return; // Don't create post if upload fails
       }
     }
     try {
-      await axiosInstance.post("/api/posts", newPost);
+      console.log("Creating post with data:", newPost);
+      const response = await axiosInstance.post("/api/posts", newPost);
+      console.log("Post created successfully:", response.data);
+      alert("Post created successfully!");
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      console.error("Error creating post:", err.response?.data || err.message);
+      alert("Failed to create post. Please check the console for details.");
     }
   };
 
