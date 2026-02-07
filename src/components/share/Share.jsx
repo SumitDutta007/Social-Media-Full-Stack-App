@@ -21,13 +21,13 @@ function Share() {
     console.log("Submit button clicked");
     console.log("User data:", user);
 
-    if (!user?.id && !user?._id) {
+    if (!user?._id && !user?.id) {
       console.error("User not loaded or no user ID found");
       alert("Please login to create a post");
       return;
     }
 
-    const userId = user.id || user._id;
+    const userId = user._id || user.id;
     console.log("Using userId:", userId);
 
     const newPost = {
