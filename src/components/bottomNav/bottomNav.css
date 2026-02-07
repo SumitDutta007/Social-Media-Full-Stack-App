@@ -1,0 +1,22 @@
+.bottom-nav-container {
+  display: none;
+}
+
+/* Show bottom navigation only on mobile */
+@media screen and (max-width: 768px) {
+  .bottom-nav-container {
+    display: block;
+  }
+
+  /* Add padding to content so it doesn't hide behind bottom nav */
+  body {
+    padding-bottom: 56px;
+  }
+}
+
+/* Hide on tablet and desktop */
+@media screen and (min-width: 769px) {
+  .bottom-nav-container {
+    display: none;
+  }
+}

@@ -3,6 +3,7 @@ import PrimarySearchAppBar from '../../components/topbar/topbar';
 import ResponsiveDrawer from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightsidebar/Rightsidebar';
+import BottomNav from '../../components/bottomNav/BottomNav';
 import './profile.css'
 import axiosInstance from '../../axios.js';
 import { useParams } from 'react-router'
@@ -25,7 +26,7 @@ function Profile() {
   return (
     <div>
             <PrimarySearchAppBar />
-            <div className="profile" style={{display:"flex"}}>
+            <div className="profile">
                 <ResponsiveDrawer />
                 <div className="profileRight">
                     <div className="profileRightTop">
@@ -44,6 +45,7 @@ function Profile() {
                     </div>
                 </div>
             </div>
+            <BottomNav />
         </div>
   )
 }

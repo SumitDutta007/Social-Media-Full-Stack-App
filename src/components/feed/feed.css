@@ -4,6 +4,10 @@
   margin-top: 10vh;
 }
 
+.feedWrapper {
+  padding-bottom: 20px;
+}
+
 /* Mobile */
 @media screen and (max-width: 768px) {
   .feed {
@@ -11,6 +15,11 @@
     padding: 10px;
     margin-top: 70px;
     width: 100%;
+    padding-bottom: 80px; /* Extra padding for bottom navigation */
+  }
+
+  .feedWrapper {
+    padding-bottom: 80px; /* Prevent content from hiding behind bottom nav */
   }
 }
 

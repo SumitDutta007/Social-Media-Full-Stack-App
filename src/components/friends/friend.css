@@ -1,11 +1,33 @@
-.sidebarFriend{
+.sidebarFriend {
     display: flex;
     align-items: center;
     padding: 15px;
-    margin-bottom: 10;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
-.sidebarFriendImg{
-    width: 50px;height: 50px;border-radius: 50%;
+
+.sidebarFriend:hover {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.sidebarFriendImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .sidebarFriend {
+        padding: 10px;
+    }
+
+    .sidebarFriendImg {
+        width: 40px;
+        height: 40px;
+    }
 }
