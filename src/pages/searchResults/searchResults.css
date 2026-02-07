@@ -1,12 +1,15 @@
 .searchResultsContainer {
   display: flex;
   width: 100%;
-  margin-top: 10vh;
+  margin-top: 64px; /* Fixed height for navbar */
+  min-height: calc(100vh - 64px);
+  position: relative;
 }
 
 .searchResultsMain {
   flex: 5.5;
   padding: 25px;
+  padding-top: 10px;
 }
 
 .searchResultsWrapper {
@@ -149,12 +152,14 @@
 @media screen and (max-width: 768px) {
   .searchResultsContainer {
     flex-direction: column;
-    margin-top: 70px;
+    margin-top: 56px; /* MUI AppBar default mobile height */
+    min-height: calc(100vh - 56px);
   }
 
   .searchResultsMain {
     flex: 1;
     padding: 10px;
+    padding-top: 15px;
     padding-bottom: 80px;
   }
 
