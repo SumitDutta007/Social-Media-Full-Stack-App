@@ -10,6 +10,8 @@ function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const [showMenu, setShowMenu] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
@@ -26,6 +28,20 @@ function Post({ post }) {
     };
     fetchUser();
   }, [post.userId]);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showMenu && !event.target.closest('.topRight')) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showMenu]);
 
   const likeHandler = () => {
     const currentUserId = currentUser?._id || currentUser?.id;
@@ -44,6 +60,39 @@ function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
+  const deleteHandler = async () => {
+    if (!window.confirm("Are you sure you want to delete this post?")) {
+      return;
+    }
+
+    try {
+      const postId = post._id || post.id;
+      await axiosInstance.delete(`/api/posts/${postId}`);
+      setIsDeleted(true);
+      alert("Post deleted successfully!");
+      // Reload page to reflect changes
+      window.location.reload();
+    } catch (err) {
+      console.error("Error deleting post:", err);
+      const errorMsg = err.response?.data?.message || "Failed to delete post";
+      alert(errorMsg);
+    }
+  };
+
+  // Check if current user can delete this post (owner or admin)
+  const canDelete = () => {
+    const currentUserId = currentUser?._id || currentUser?.id;
+    const postUserId = post.userId;
+    const isAdmin = currentUser?.isAdmin;
+    
+    return currentUserId === postUserId || isAdmin;
+  };
+
+  // Don't render if post is deleted
+  if (isDeleted) {
+    return null;
+  }
 
   return (
     <div className="posts">
@@ -67,8 +116,28 @@ function Post({ post }) {
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
-          <div className="topRight">
-            <MoreVertIcon />
+          <div className="topRight" style={{ position: 'relative' }}>
+            {canDelete() && (
+              <>
+                <MoreVertIcon 
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setShowMenu(!showMenu)}
+                />
+                {showMenu && (
+                  <div className="postMenu">
+                    <button 
+                      className="postMenuButton deleteButton"
+                      onClick={deleteHandler}
+                    >
+                      {currentUser?.isAdmin && post.userId !== (currentUser?._id || currentUser?.id) 
+                        ? '🗑️ Delete (Admin)' 
+                        : '🗑️ Delete Post'
+                      }
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
         <div className="postCenter">
