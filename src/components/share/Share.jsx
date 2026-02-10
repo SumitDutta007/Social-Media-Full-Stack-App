@@ -37,33 +37,43 @@ function Share() {
 
     console.log("New post data (before image):", newPost);
 
+    // Upload image to Cloudinary if file is selected
     if (file) {
-      const data = new FormData();
-      const fileName = Date.now() + file.name;
-      data.append("name", fileName);
-      data.append("file", file);
+      const formData = new FormData();
+      formData.append("image", file);
+      
       try {
-        console.log("Uploading file...");
-        const uploadRes = await axiosInstance.post("/api/upload", data);
+        console.log("Uploading image to Cloudinary...");
+        const uploadRes = await axiosInstance.post("/api/posts/upload", formData);
         console.log("Upload response:", uploadRes.data);
-        // Use the full URL from Cloudinary if available, otherwise use filename
-        newPost.img = uploadRes.data.url || uploadRes.data.filename || fileName;
+        
+        // Use the Cloudinary URL from response
+        newPost.img = uploadRes.data.imageUrl;
         console.log("Image URL saved:", newPost.img);
       } catch (err) {
         console.error("Upload error:", err.response?.data || err.message);
-        alert("Failed to upload image. Please try again.");
+        const errorMsg = err.response?.data?.message || "Failed to upload image. Please try again.";
+        alert(errorMsg);
         return; // Don't create post if upload fails
       }
     }
+    
     try {
       console.log("Creating post with data:", newPost);
       const response = await axiosInstance.post("/api/posts", newPost);
       console.log("Post created successfully:", response.data);
       alert("Post created successfully!");
+      
+      // Clear form
+      desc.current.value = "";
+      setFile(null);
+      
+      // Reload to show new post
       window.location.reload();
     } catch (err) {
       console.error("Error creating post:", err.response?.data || err.message);
-      alert("Failed to create post. Please check the console for details.");
+      const errorMsg = err.response?.data?.message || "Failed to create post. Please try again.";
+      alert(errorMsg);
     }
   };
 

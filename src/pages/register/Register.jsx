@@ -1,11 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import './register.css'
 import { Link, useNavigate } from 'react-router-dom';
-import axiosInstance from '../../axios.js';
+import { registerCall } from '../apiCalls';
+import { AuthContext } from '../../context/AuthContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Register() {
 
     const navigate = useNavigate();
+    const { isFetching, dispatch } = useContext(AuthContext);
 
     const username = useRef();
     const email = useRef();
@@ -16,6 +19,7 @@ function Register() {
         e.preventDefault();
         if(password.current.value !== passwordAgain.current.value){
             passwordAgain.current.setCustomValidity("Passwords don't match!");
+            alert("Passwords don't match!");
         }
         else{
             const user = {
@@ -24,11 +28,16 @@ function Register() {
                 password: password.current.value
             };
             try{
-                await axiosInstance.post("/api/auth/register",user);
-                navigate('/login');
+                // Use registerCall which handles token storage
+                await registerCall(user, dispatch);
+                
+                // Navigate to home page after successful registration
+                navigate('/');
             }
             catch(err){
                 console.log(err);
+                const errorMessage = err.response?.data?.message || 'Registration failed. Please try again.';
+                alert(errorMessage);
             }
         }
     };
@@ -46,9 +55,11 @@ function Register() {
                     <input type="email" placeholder='Email' className="registerInput" required ref={email}/>
                     <input type="password" placeholder='Password' className="registerInput" minLength={6} required ref={password}/>
                     <input type="password" placeholder='Password again' className="registerInput" required ref={passwordAgain}/>
-                    <button className="registerButton" type='submit'>Sign Up</button>
+                    <button className="registerButton" type='submit' disabled={isFetching}>
+                        {isFetching ? <CircularProgress color='inherit' size="30px"/> : "Sign Up"}
+                    </button>
                     <Link to='/login' style={{textDecoration: 'none',alignSelf:"center"}}>
-                        <button className="registerRegisterButton">Log Into Account</button>
+                        <button className="registerRegisterButton" disabled={isFetching}>Log Into Account</button>
                     </Link>
                 </form>
             </div>

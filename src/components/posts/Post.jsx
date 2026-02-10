@@ -29,15 +29,17 @@ function Post({ post }) {
 
   const likeHandler = () => {
     const currentUserId = currentUser?._id || currentUser?.id;
-    if (!currentUserId) return; // Don't proceed if user is not loaded
+    if (!currentUserId) {
+      console.log("User not logged in");
+      return; // Don't proceed if user is not loaded
+    }
 
     try {
       const postId = post._id || post.id;
-      axiosInstance.put("/api/posts/" + postId + "/like", {
-        userId: currentUserId,
-      });
+      // No need to send userId in body - backend gets it from JWT token
+      axiosInstance.put("/api/posts/" + postId + "/like");
     } catch (err) {
-      console.log(err);
+      console.log("Error liking post:", err);
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);

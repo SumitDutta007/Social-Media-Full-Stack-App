@@ -248,7 +248,7 @@ export default function PrimarySearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <form onSubmit={handleSearch} style={{ width: '100%' }}>
+            <form onSubmit={handleSearch} style={{ width: "100%" }}>
               <StyledInputBase
                 placeholder="Search users or posts…"
                 inputProps={{ "aria-label": "search" }}

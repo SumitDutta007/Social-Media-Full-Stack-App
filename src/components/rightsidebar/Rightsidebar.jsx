@@ -31,22 +31,25 @@ function Rightbar({ user }) {
   }, [user]);
 
   const handleClick = async () => {
-    if (!user?.id || !currentUser?.id) return; // Don't proceed if either user is not loaded
+    if (!user?.id || !currentUser?.id) {
+      console.log("User not logged in");
+      return; // Don't proceed if either user is not loaded
+    }
 
     try {
       if (followed) {
-        await axiosInstance.put(`/api/users/${user.id}/unfollow`, {
-          userId: currentUser.id,
-        });
+        // No need to send userId - backend gets it from JWT token
+        await axiosInstance.put(`/api/users/${user.id}/unfollow`);
         dispatch({ type: "UNFOLLOW", payload: user.id });
       } else {
-        await axiosInstance.put(`/api/users/${user.id}/follow`, {
-          userId: currentUser.id,
-        });
+        // No need to send userId - backend gets it from JWT token
+        await axiosInstance.put(`/api/users/${user.id}/follow`);
         dispatch({ type: "FOLLOW", payload: user.id });
       }
       setFollowed(!followed);
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error following/unfollowing user:", err);
+    }
   };
 
   const HomeRightbar = () => {
